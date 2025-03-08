@@ -8,6 +8,9 @@ cafeurl: "/cafe"
 url: "https://liqrase.github.io/cafe/" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: #if your site has a twitter account, enter it here
 
+# マークダウン
+highlighter: rouge
+
 # Author Settings
 author: Ligrase # add your name
 author-img: david-freeman.jpg # add your photo
