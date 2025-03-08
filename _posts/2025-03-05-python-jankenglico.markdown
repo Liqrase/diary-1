@@ -7,7 +7,7 @@ img:  # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Python]
 ---
-#### Pythonでじゃんけんグリコのプログラムを作る課題を与えられ、それをこなしました。
+### Pythonでじゃんけんグリコのプログラムを作る課題を与えられ、それをこなしました。
 
 
 <details><summary制作：ジャンケングリコを作る</summary>
@@ -23,13 +23,14 @@ tags: [Python]
 全く知らないサービスでしたので、ついでに登録の仕方やのGITのダウンロードやコマンドの打ち方などについても手取り足取り教えてもらい、
 数時間画面と格闘することで無事公開まで辿り着くことができました。
 
-[じゃんけんグリコ](https://images-dycudlrhav7fnl3liqevsj.streamlit.app/)
+#### [じゃんけんグリコ](https://images-dycudlrhav7fnl3liqevsj.streamlit.app/)
+
 ちなみにStreamlitにアップロードするにあたって、ChatGPTさんがプログラムをサラッとStreamlit対応の形式に書き換えてくれています。
 ChatGPTさん凄すぎる…！
 いらすとやの画像は後で私が追加しています。
 
 私がこしらえたコードの原本は下記のとおりです。
-```python:jankenglico.py
+```python
 import random
 
 # 歩数割り出し
@@ -94,7 +95,7 @@ else:
 ```
 
 ちなみに、課題の怪盗例のコードでは、
-```python:jankenglico-trim.py
+```python
 if (p_hand == "グー" and cp_hand == "チョキ") or (p_hand == "チョキ" and cp_hand == "パー") or (p_hand == "パー" and cp_hand == "グー"):
 ```
 などの条件の部分は、グーチョキパーを0,1,2に割り当てたリストを作り、3で割った余りを利用して場合分けされていました。
