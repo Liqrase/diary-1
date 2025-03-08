@@ -1,30 +1,99 @@
 ---
 layout: post
-title: How I Rest From Work
-date: 2017-09-12 13:32:20 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
-img: i-rest.jpg # Add image post (optional)
+title: Python ジャンケングリコ
+date: 2025-03-05 00:000:00 +0300
+description:  # Add post description (optional)
+img:  # Add image post (optional)
 fig-caption: # Add figcaption (optional)
-tags: [Holidays, Hawaii]
+tags: [Python]
 ---
-Fam locavore snackwave bushwick +1 sartorial. Selfies portland knausgaard synth. Pop-up art party marfa deep v pitchfork subway tile 3 wolf moon. Ennui pinterest tumblr yr, adaptogen succulents copper mug twee. Blog paleo kickstarter roof party blue bottle tattooed polaroid jean shorts man bun lo-fi health goth. Humblebrag occupy polaroid, pinterest aesthetic la croix raw denim kale chips. 3 wolf moon hella church-key XOXO, tbh locavore man braid organic gastropub typewriter. Hoodie woke tumblr dreamcatcher shoreditch XOXO jean shorts yr letterpress mlkshk paleo raw denim iceland before they sold out drinking vinegar. Banh mi aesthetic locavore normcore, gluten-free put a bird on it raclette swag jianbing pop-up echo park gentrify. Stumptown brooklyn godard tumeric ethical. Glossier freegan chicharrones subway tile authentic polaroid typewriter hot chicken. Thundercats small batch heirloom meggings.
+## Pythonでじゃんけんグリコのプログラムを作る課題を与えられ、それをこなしました。
 
-## Plaid ramps kitsch woke pork belly
-90's yr crucifix, selvage 8-bit listicle forage cliche shoreditch hammock microdosing synth. Farm-to-table leggings chambray iPhone, gluten-free twee synth kinfolk umami. Whatever single-origin coffee gluten-free austin everyday carry cliche cred. Plaid ramps kitsch woke pork belly organic. Trust fund whatever coloring book kombucha brooklyn. Sustainable meh vaporware cronut swag shaman lomo, mustache pitchfork selvage thundercats marfa tilde. Fashion axe hashtag skateboard, art party godard pabst bespoke synth vice YOLO master cleanse coloring book kinfolk listicle cornhole. Try-hard mixtape umami fanny pack man bun gastropub franzen tbh. Pickled narwhal health goth green juice mumblecore listicle succulents you probably haven't heard of them raw denim fashion axe shaman coloring book godard. Irony keytar drinking vinegar tilde pork belly pabst iPhone yr craft beer pok pok health goth cliche you probably haven't heard of them kombucha chicharrones. Direct trade hella roof party chia. Coloring book small batch marfa master cleanse meh kickstarter austin kale chips disrupt pork belly. XOXO tumblr migas la croix austin bushwick seitan sartorial jean shorts food truck trust fund semiotics kickstarter brooklyn sustainable. Umami knausgaard mixtape marfa. Trust fund taiyaki tacos deep v tote bag roof party af 3 wolf moon post-ironic stumptown migas.
+>制作：ジャンケングリコを作る
+>【条件】
+> ・キーボード入力でじゃんけんを行う
+> ・グーで勝ったら３マス、チョキで勝ったら５マス、パーで勝ったら６マス進む
+> ・どちらかが既定のマス数進んだら勝利　(目安：２０マス程度)
+> ・じゃんけんの相手はコンピューターとし、手はランダムとする
+> ・１回のじゃんけん終了時に、お互いが今何マス目にいるかを表示する
 
-![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
+折角なのでWeb上で遊べるようにできないかと思ってChatGPTにたずねたところ、Streamlitというサイトを紹介して貰いました。
+全く知らないサービスでしたので、ついでに登録の仕方やのGITのダウンロードやコマンドの打ち方などについても手取り足取り教えてもらい、
+数時間画面と格闘することで無事公開まで辿り着くことができました。
 
-Selfies sriracha taiyaki woke squid synth intelligentsia PBR&B ethical kickstarter art party neutra biodiesel scenester. Health goth kogi VHS fashion axe glossier disrupt, vegan quinoa. Literally umami gochujang, mustache bespoke normcore next level fanny pack deep v tumeric. Shaman vegan affogato chambray. Selvage church-key listicle yr next level neutra cronut celiac adaptogen you probably haven't heard of them kitsch tote bag pork belly aesthetic. Succulents wolf stumptown art party poutine. Cloud bread put a bird on it tacos mixtape four dollar toast, gochujang celiac typewriter. Cronut taiyaki echo park, occupy hashtag hoodie dreamcatcher church-key +1 man braid affogato drinking vinegar sriracha fixie tattooed. Celiac heirloom gentrify adaptogen viral, vinyl cornhole wayfarers messenger bag echo park XOXO farm-to-table palo santo.
+[じゃんけんグリコ](https://images-dycudlrhav7fnl3liqevsj.streamlit.app/)
+ちなみにStreamlitにアップロードするにあたって、ChatGPTさんがプログラムをサラッとStreamlit対応の形式に書き換えてくれています。
+ChatGPTさん凄すぎる…！
+いらすとやの画像は後で私が追加しています。
 
->Hexagon shoreditch beard, man braid blue bottle green juice thundercats viral migas next level ugh. Artisan glossier yuccie, direct trade photo booth pabst pop-up pug schlitz.
+私がこしらえたコードの原本は下記のとおりです。
+```Python
+import random
 
-Cronut lumbersexual fingerstache asymmetrical, single-origin coffee roof party unicorn. Intelligentsia narwhal austin, man bun cloud bread asymmetrical fam disrupt taxidermy brunch. Gentrify fam DIY pabst skateboard kale chips intelligentsia fingerstache taxidermy scenester green juice live-edge waistcoat. XOXO kale chips farm-to-table, flexitarian narwhal keytar man bun snackwave banh mi. Semiotics pickled taiyaki cliche cold-pressed. Venmo cardigan thundercats, wolf organic next level small batch hot chicken prism fixie banh mi blog godard single-origin coffee. Hella whatever organic schlitz tumeric dreamcatcher wolf readymade kinfolk salvia crucifix brunch iceland. Literally meditation four loko trust fund. Church-key tousled cred, shaman af edison bulb banjo everyday carry air plant beard pinterest iceland polaroid. Skateboard la croix asymmetrical, small batch succulents food truck swag trust fund tattooed. Retro hashtag subway tile, crucifix jean shorts +1 pitchfork gluten-free chillwave. Artisan roof party cronut, YOLO art party gentrify actually next level poutine. Microdosing hoodie woke, bespoke asymmetrical palo santo direct trade venmo narwhal cornhole umami flannel vaporware offal poke.
+# 歩数割り出し
+def step(hand):
+    if hand == "グー":
+        return 3
+    elif hand == "チョキ":
+        return 5
+    else:
+        return 6
 
-* Hexagon shoreditch beard
-* Intelligentsia narwhal austin
-* Literally meditation four
-* Microdosing hoodie woke
+# じゃんけん
+def janken(p_hand,cp_hand):
+    if (p_hand == "グー" and cp_hand == "チョキ") or 
+        (p_hand == "チョキ" and cp_hand == "パー") or 
+        (p_hand == "パー" and cp_hand == "グー"):
+        print("あなたの勝ち！")
+        return 1
+    elif (p_hand == "グー" and cp_hand == "パー") or 
+        (p_hand == "チョキ" and cp_hand == "グー") or 
+        (p_hand == "パー" and cp_hand == "チョキ"):
+        print("CPUの勝ち！")
+        return 2
+    else:
+        return 3
 
-Wayfarers lyft DIY sriracha succulents twee adaptogen crucifix gastropub actually hexagon raclette franzen polaroid la croix. Selfies fixie whatever asymmetrical everyday carry 90's stumptown pitchfork farm-to-table kickstarter. Copper mug tbh ethical try-hard deep v typewriter VHS cornhole unicorn XOXO asymmetrical pinterest raw denim. Skateboard small batch man bun polaroid neutra. Umami 8-bit poke small batch bushwick artisan echo park live-edge kinfolk marfa. Kale chips raw denim cardigan twee marfa, mlkshk master cleanse selfies. Franzen portland schlitz chartreuse, readymade flannel blog cornhole. Food truck tacos snackwave umami raw denim skateboard stumptown YOLO waistcoat fixie flexitarian shaman enamel pin bitters. Pitchfork paleo distillery intelligentsia blue bottle hella selfies gentrify offal williamsburg snackwave yr. Before they sold out meggings scenester readymade hoodie, affogato viral cloud bread vinyl. Thundercats man bun sriracha, neutra swag knausgaard jean shorts. Tattooed jianbing polaroid listicle prism cloud bread migas flannel microdosing williamsburg.
+# 変数、リスト設定
+p_walk = 0
+cp_walk = 0
+count = 1
+weaporn = ["グー", "チョキ", "パー"]
 
-Echo park try-hard irony tbh vegan pok pok. Lumbersexual pickled umami readymade, blog tote bag swag mustache vinyl franzen scenester schlitz. Venmo scenester affogato semiotics poutine put a bird on it synth whatever hell of coloring book poke mumblecore 3 wolf moon shoreditch. Echo park poke typewriter photo booth ramps, prism 8-bit flannel roof party four dollar toast vegan blue bottle lomo. Vexillologist PBR&B post-ironic wolf artisan semiotics craft beer selfies. Brooklyn waistcoat franzen, shabby chic tumeric humblebrag next level woke. Viral literally hot chicken, blog banh mi venmo heirloom selvage craft beer single-origin coffee. Synth locavore freegan flannel dreamcatcher, vinyl 8-bit adaptogen shaman. Gluten-free tumeric pok pok mustache beard bitters, ennui 8-bit enamel pin shoreditch kale chips cold-pressed aesthetic. Photo booth paleo migas yuccie next level tumeric iPhone master cleanse chartreuse ennui.
+#ここから
+print("  ！！じゃんけんグリコを始めます！！")
+while p_walk < 20 and cp_walk < 20:
+    while True:
+        p_hand = input(f"\n{count}戦目。出したい手を「グー」「チョキ」「パー」の3択で入力してください。 >>")
+        if p_hand  in ["グー","チョキ","パー"]:
+            break
+        else:
+            print("入力が正しくありません。「グー」「チョキ」「パー」の中から選んで入力してください。")
+    cp_hand = random.choice(weaporn)
+    print("じゃん、けん、ぽん！")
+    print(f"あなたは{p_hand}を出し、CPUは{cp_hand}を出した！")
+    hantei = janken(p_hand,cp_hand)
+    if hantei == 1:
+        print(f"あなたは{step(p_hand)}マス進む。")
+        p_walk += step(p_hand)
+        count += 1
+    elif hantei == 2:
+        print(f"CPUは{step(cp_hand)}マス進む。")
+        cp_walk += step(cp_hand)
+        count += 1
+    else:
+        print("あいこ。やり直し！")
+    print(f"現在地は、あなた:{p_walk}マス目、CPU:{cp_walk}マス目です。")
+# 最終判定
+if p_walk >= 20:
+    print("\nあなたの勝ち！")
+else:
+    print("\nCPUの勝ち！")
+```
+
+ちなみに、課題の怪盗例のコードでは、
+```
+if (p_hand == "グー" and cp_hand == "チョキ") or (p_hand == "チョキ" and cp_hand == "パー") or (p_hand == "パー" and cp_hand == "グー"):
+```
+などの条件の部分は、グーチョキパーを0,1,2に割り当てたリストを作り、3で割った余りを利用して場合分けされていました。
+かしこい(小並感)。
