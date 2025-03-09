@@ -1216,7 +1216,8 @@ header {
 
 .header-page .page-title {
   font-weight: 400;
-  margin: 10px 0;
+  border: 10px 0 0;
+  margin: 0 0 10px;
   line-height: 1.3;
 }
 
