@@ -29,11 +29,7 @@ analytics: # Google Analytics
 
 # Build Settings
 markdown: kramdown
-kramdown:
-  input: GFM  # GitHub Flavored Markdown（GFM）を使用
-  syntax_highlighter: rouge  # コードハイライトにrougeを使用
-  auto_ids: true  # 見出しに自動IDを付与
-  enable_coderay: false  # CodeRayを無効化（代わりにrougeを使う）
+highlighter: rouge
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
