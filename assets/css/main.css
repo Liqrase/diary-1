@@ -1096,6 +1096,7 @@ table tfoot td {
 
 footer {
   background-color: #8bbf5f;
+  border-radius: 10px;
 }
 
 footer .copyright {
@@ -1204,7 +1205,8 @@ a.newer-posts:hover {
 }
 
 header {
-  background-color: #b0e57c;
+  background-color: #d2e3b6;
+  border-radius: 10px;
 }
 
 .header-page {
