@@ -4,6 +4,7 @@ title: "Jekyllに挑戦！"
 date: 2025-03-07 00:00:00 +03008
 description:  # Add post description (optional)
 img: postimg/20250307-1_main.png  # Add image post (optional)
+tags: [Jekyll]
 ---
 #### じゃんけんグリコ投稿ページをJekyllのページに移設
 
