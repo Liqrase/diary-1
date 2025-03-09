@@ -1,7 +1,6 @@
 title: Program Practice
 description: > # this means to ignore newlines until "baseurl:"
-  作ったものを雑に載せる場所です。
-  このページはJekyllというサービスを利用しています。
+  プログラミング周りの私的なことを雑に載せる場所です。
 permalink: ':title/'
 baseurl: "/diary-1" # the subpath of your site, e.g. /blog
 cafeurl: "/cafe"
