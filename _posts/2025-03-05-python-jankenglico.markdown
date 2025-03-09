@@ -3,7 +3,7 @@ layout: post
 title: Python ジャンケングリコ
 date: 2025-03-05 00:000:00 +0300
 description:  # Add post description (optional)
-img:  # Add image post (optional)
+img:  postimg/20250304-1_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Python]
 ---
