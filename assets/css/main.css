@@ -1094,6 +1094,10 @@ table tfoot td {
           transform: scale(1.2);
 }
 
+footer {
+  background-color: #8bbf5f;
+}
+
 footer .copyright {
   font-size: 14px;
   text-align: center;
@@ -1197,6 +1201,10 @@ a.newer-posts:hover {
 /* - - - - - - - - - - Post Page Styles - - - - - - - - - - */
 .wrap-content {
   padding: 20px;
+}
+
+header {
+  background-color: #b0e57c;
 }
 
 .header-page {
