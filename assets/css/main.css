@@ -941,6 +941,11 @@ table tfoot td {
   text-align: center;
 }
 
+.about .diaryname {
+  font-size: 20px;
+  margin: 0 auto 10px;
+}
+
 .about .cover-author-image {
   width: 100px;
   height: 100px;
