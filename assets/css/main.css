@@ -941,9 +941,9 @@ table tfoot td {
   text-align: center;
 }
 
-.about .diaryname {
+.diaryname {
   font-size: 20px;
-  margin: 10px auto 10px;
+  margin: 5px auto 10px;
   text-decoration: none; /* 下線を消す */
   color: inherit; /* 親要素の文字色を継承 */
 }
