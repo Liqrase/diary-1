@@ -943,7 +943,9 @@ table tfoot td {
 
 .about .diaryname {
   font-size: 20px;
-  margin: 0 auto 10px;
+  margin: 10px auto 10px;
+  text-decoration: none; /* 下線を消す */
+  color: inherit; /* 親要素の文字色を継承 */
 }
 
 .about .cover-author-image {
