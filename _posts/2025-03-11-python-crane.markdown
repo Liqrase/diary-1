@@ -20,7 +20,7 @@ tags: [Program, Python]
 
 原本
 
-<details>
+<details markdown="1">
   <summary>クリックしてコードを表示</summary>
 ```python
 import random
@@ -141,7 +141,7 @@ print("ありがとう！ また遊んでね！")
 そして以下が、完全ChatGPT作成のStreamlit対応版
 上のコードから数回の修正をさせるだけでここまで作ってくれるのだから凄い。
 
-<details>
+<details markdown="1">
   <summary>クリックしてコードを表示</summary>
 ```python
 import streamlit as st
