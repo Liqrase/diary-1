@@ -6,7 +6,7 @@ description: You’ll find this post in your `_posts` directory. Go ahead and ed
 img: postimg/20250309-1_main.png # Add image post (optional)
 tags: [資格, Python] # add tag
 ---
-#### やったぜ。
+#### や↑ったぜ。
 
 使った参考書は定番の『Python3エンジニア認定 基礎試験問題集』。<br>
 周囲からオススメされている通り、この本を3周して1週間で受かる予定でしたが、<br>

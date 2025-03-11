@@ -135,7 +135,8 @@ for count in range(11):
             print("ウィ～～ン……スカッ！")
             print(f"あなたは何も手に入れることが出来なかった…。")
 print("ありがとう！ また遊んでね！")
-</details>```
+```
+</details>
 
 そして以下が、完全ChatGPT作成のStreamlit対応版
 上のコードから数回の修正をさせるだけでここまで作ってくれるのだから凄い。
@@ -246,5 +247,5 @@ if game["playing"]:
         new_price, getMoney, profit, urine = sell(game["syojiPrice"], game["getList"])
         st.write(f"売却価格: {getMoney}円")
         st.write(f"最終所持金: {new_price}円 ({'利益' if profit >= 0 else '損失'}: {abs(profit)}円)")
-</details>
 ```
+</details>
