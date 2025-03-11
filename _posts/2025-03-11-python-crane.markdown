@@ -18,6 +18,8 @@ tags: [Program, Python]
 参考までに、原本と上記サイト対応版を両方載せておきます。
 (原本の方も、商品をフィールドに配置する部分と、フィールド座標と景品の位置を対応させた辞書を作成する部分は私一人では考えきれず、ChatGPTに助けてもらった模様。)
 
+後日時間がある時に、Jekyllで長いソースコードを折りたためる方法を探そうと思います。
+
 原本
 ```python
 import random
@@ -242,3 +244,4 @@ if game["playing"]:
         st.write(f"売却価格: {getMoney}円")
         st.write(f"最終所持金: {new_price}円 ({'利益' if profit >= 0 else '損失'}: {abs(profit)}円)")
 ```
+以上です。
