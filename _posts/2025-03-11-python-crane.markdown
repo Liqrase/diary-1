@@ -137,7 +137,7 @@ for count in range(11):
 print("ありがとう！ また遊んでね！")
 ```
 
-そして以下が、完全ChatGPT作成のStreamlit対応版
+そして以下が、完全ChatGPT作成のStreamlit対応版。<br>
 上のコードから数回の修正をさせるだけでここまで作ってくれるのだから凄い。
 
 ```python
