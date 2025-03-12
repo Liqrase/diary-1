@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python3エンジニア認定基礎試験に合格
-date: 2025-03-09 01:00:00 +0300
+date: 2025-03-09 01:00:00 
 description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
 img: postimg/20250309-1_main.png # Add image post (optional)
 tags: [資格, Python] # add tag

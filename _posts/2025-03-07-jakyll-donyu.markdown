@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Jekyllに挑戦！"
-date: 2025-03-07 01:00:00 +03008
+date: 2025-03-07 01:00:00 
 description:  # Add post description (optional)
 img: postimg/20250307-1_main.png  # Add image post (optional)
 tags: [Jekyll]
