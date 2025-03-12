@@ -810,6 +810,11 @@ blockquote {
 
 pre {
   padding: 1rem 2rem;
+  max-height: 300px; /* 高さ制限 */
+  overflow-y: auto;  /* 縦スクロール */
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
