@@ -23,6 +23,7 @@ discus-identifier: mr-brown # add your discus identifier
 analytics: # Google Analytics
 
 # Build Settings
+future: true
 markdown: kramdown
 plugins:
   - jekyll-sitemap
