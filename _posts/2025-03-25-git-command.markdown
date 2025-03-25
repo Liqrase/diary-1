@@ -11,22 +11,22 @@ tags: [Git]
 確認を簡単にするためにここにまとめます。<br>
 （超基本的な内容です）
 
-####ローカルフォルダの移動
+#### ローカルフォルダの移動
 ```Git
 cd
 ```
 
-####フォルダをGitに対応
+#### フォルダをGitに対応
 ```Git
 git init
 ```
 
-####ローカルブランチをmasterからmainに
+#### ローカルブランチをmasterからmainに
 ```Git
 git branch -m main
 ```
 
-####ローカルフォルダを目的のリポジトリと対応：
+#### ローカルフォルダを目的のリポジトリと対応：
 ```Git
 git remote add origin リポジトリ
 ```
@@ -35,12 +35,12 @@ git remote add origin リポジトリ
 git remote add origin https://github.com/Liqrase/diary-1.git
 ```
 
-####ローカルフォルダとリポジトリの対応を確認
+#### ローカルフォルダとリポジトリの対応を確認
 ```Git
 git remote -v
 ```
 
-####同期３点セット
+#### 同期３点セット
 リポジトリの内容を取得<br>
 →ローカルフォルダを上書き<br>
 →ローカルの差異(不要ファイル)をなくして完全にリポジトリと同じ状態にする：
@@ -50,7 +50,7 @@ git reset --hard origin/main
 git clean -fd
 ```
 
-####アップロード３点セット
+#### アップロード３点セット
 ```Git
 git add .
 git commit -m "コメント"
