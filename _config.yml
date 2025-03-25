@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Ligrase # add your name
 author-img: ofuro_oke_wood.png # add your photo
-about-author: 作ったものやメモ等を雑に載せる場所です。プログラミング関係でも日記としての面が強い物は<a href="https://liqrase.github.io/diary-3">こっち</a>。 # add description
+about-author: 作ったものやメモ等を雑に載せる場所です。 # add description
 social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: # add your Github handle
