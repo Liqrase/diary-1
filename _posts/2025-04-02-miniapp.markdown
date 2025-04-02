@@ -15,6 +15,7 @@ ChatGPTの力で簡易メソッド定義も作っていたのですが、この�
 #### BaseDAO
 データベース接続のための基本クラス
 
+---
 ## ログイン
 
 #### JSP login.jsp
@@ -46,9 +47,7 @@ UserDAOを通してデータベースからユーザー情報を取得、<br>
 ### Domain User
 アプリ内部で使うためのユーザーモデル。
 
-
-
-
+---
 ## ユーザー登録
 
 #### JSP register.jsp
@@ -105,9 +104,7 @@ TransactioManager でトランザクションを開始した上で、<br>
 問題があればそれぞれの目的に応じたメッセージを返す。<br>
 （Utilityとは共通処理をまとめた便利クラスのこと）
 
-
-
-
+---
 ## ログアウト
 
 #### JSP login.jsp
@@ -117,9 +114,7 @@ TransactioManager でトランザクションを開始した上で、<br>
 GET型で受け取った時、セッションスコープを取得し、それを破棄。<br>
 login.jsp へ送る。
 
-
-
-
+---
 ## 会員情報変更
 
 #### JSP edit.jsp
@@ -162,9 +157,7 @@ TransactioManager でトランザクションを開始した上で、<br>
 #### Utilty Validati
 ユーザー登録の欄と挙動が同じなので割愛。
 
-
-
-
+---
 ## 登録削除
 
 #### JSP deleteConfirm.jsp
@@ -195,8 +188,7 @@ TransactioManager でトランザクションを開始した上で、<br>
 #### Domain User
 ユーザー登録の欄と挙動が同じなので割愛。
 
-
-
+---
 ## 使用するデータベースの中身
 postgres=# SELECT * FROM users;<br>
  id | login_id | password | name |         created_at<br>

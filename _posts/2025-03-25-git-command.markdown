@@ -40,7 +40,7 @@ git remote add origin https://github.com/Liqrase/diary-1.git
 git remote -v
 ```
 
-#### 同期３点セット
+#### 同期３点セット（扱い注意！！）
 リポジトリの内容を取得<br>
 →ローカルフォルダを上書き<br>
 →ローカルの差異(不要ファイル)をなくして完全にリポジトリと同じ状態にする：
