@@ -25,8 +25,6 @@ analytics: # Google Analytics
 # Build Settings
 future: true
 markdown: kramdown
-kramdown:
-  input: GFM
 plugins:
   - jekyll-sitemap
   - jekyll-paginate

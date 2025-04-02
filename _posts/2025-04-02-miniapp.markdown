@@ -22,83 +22,56 @@ postgres=# SELECT * FROM users;<br>
 ミニアプリを作る講習を受けました。
 
 流れをまとめます。<br>
-（簡易メソッド定義の欄はChatGPTの助力を大いに受けています。）
+ChatGPTの力で簡易メソッド定義も作っていたのですが、このブログがmarkdownの表の表示に未対応で書き直す気力がなかったので、掲載を断念しました。
 
 #### BaseDAO
 データベース接続のための基本クラス
 
 ## ログイン
-### ログイン - 関連ファイル
+
 #### JSP login.jsp
 入力画面<br>
 POST型で LoginController に入力情報を送る。
+
 #### JSP home.jsp
 ログインが成功した場合に最後に表示される画面。
+
 #### Controller LoginController
 POST型でログインIDとパスワードを受け取り、UserLoginService を通してのログインチェック。<br>
 成功した場合は、sessionスコープに情報を詰めて、home.jsp に送る。<br>
 失敗した場合は、リクエストスコープにエラー文を詰めて、login.jsp に送る。
 GET型で受け取った場合は、loginErrorに情報を入れてlogin.jspを表示。
+
 #### Service UserLoginService
 UserDAOを通してデータベースからユーザー情報を取得、<br>
 ユーザーID及びパスワードが合致していたら、<br>
 さらにUserDTOでユーザー情報をセットし、その情報を Domain でドメインモデルに変換し、それを返す。
 失敗していたらFalseを返す。
+
 #### DAO UserDAO
 データベースへアクセス(SELECT文)。<br>
 結果をDTO型の変数に詰め込んで返す。
+
 #### DTO UserDTO
 データベースのデータを受け取る入れ物。
+
 ### Domain User
 アプリ内部で使うためのユーザーモデル。
 
-### ログイン - 簡易メソッド定義
-| クラス              | メソッド名                  | 目的                                     | 引数                                                  | 戻り値              |
-|---------------------|-----------------------------|------------------------------------------|--------------------------------------------------------|---------------------|
-| BaseDAO             |                             |                                          |                                                        |                     |
-|                     | getConnection()             | DB接続を取得(初回は生成)                | -                                                      | Connection          |
-| LoginController     |                             |                                          |                                                        |                     |
-|                     | doGet()                     | ログイン画面表示(GET)                   |                                                        |                     |
-|                     | doPost()                    | ログイン処理実行(POST)                  |                                                        |                     |
-| UserLoginService    |                             |                                          |                                                        |                     |
-|                     | loginCheck(id, pw)          | 入力情報とDB情報を照合して認証          | String loginId, String password                        | User or null        |
-| UserDAO             |                             |                                          |                                                        |                     |
-|                     | selectByLoginId(id)         | ログインIDからユーザー情報を取得        | String loginId                                         | UserDTO or null     |
-| dto.UserDTO         |                             |                                          |                                                        |                     |
-|                     | getId()                     | ユーザーIDを取得                         | -                                                      | int                 |
-|                     | setId(id)                   | ユーザーIDを設定                         | int id                                                 | void                |
-|                     | getLoginId()                | ログインIDを取得                         | -                                                      | String              |
-|                     | setLoginId(id)              | ログインIDを設定                         | String loginId                                         | void                |
-|                     | getPassword()               | パスワードを取得                         | -                                                      | String              |
-|                     | setPassword(pw)             | パスワードを設定                         | String password                                        | void                |
-|                     | getName()                   | 名前を取得                               | -                                                      | String              |
-|                     | setName(name)               | 名前を設定                               | String name                                            | void                |
-|                     | getCreatedAt()              | 登録日時を取得                           | -                                                      | Timestamp           |
-|                     | setCreatedAt(ts)            | 登録日時を設定                           | Timestamp createdAt                                    | void                |
-| User                |                             |                                          |                                                        |                     |
-|                     | getId()                     | ユーザーIDを取得                         | -                                                      | int                 |
-|                     | setId(id)                   | ユーザーIDを設定                         | int id                                                 | void                |
-|                     | getLoginId()                | ログインIDを取得                         | -                                                      | String              |
-|                     | setLoginId(id)              | ログインIDを設定                         | String loginId                                         | void                |
-|                     | getPassword()               | パスワードを取得                         | -                                                      | String              |
-|                     | setPassword(pw)             | パスワードを設定                         | String password                                        | void                |
-|                     | getName()                   | 名前を取得                               | -                                                      | String              |
-|                     | setName(name)               | 名前を設定                               | String name                                            | void                |
-|                     | getCreatedAt()              | 登録日時を取得                           | -                                                      | Date                |
-|                     | getCreatedAtStr(ts)         | 表示用の登録日文字列を取得              | -                                                      | String              |
-
-
 
 ## ユーザー登録
-### ユーザー登録 - 関連ファイル
+
 #### JSP register.jsp
 ユーザー登録画面。<br>
 POST型で RegisterController に情報を送る。
+
 #### registerConfirm.jsp
 内容確認画面。<br>
 受け取った情報を表示し、ユーザーが登録ボタンを押すとPOST型で RegisterConfirmController に情報を送る。
+
 #### registerDone.jsp
 完了メッセージ画面
+
 #### Controller RegisterController
 GET型で受け取った場合は、register.jspを表示。<br>
 POST型で受け取った場合は、情報を取得後 validation を通してエラーチェックを行い、<br>
@@ -108,151 +81,120 @@ UserRegisterService を通して重複の有無を確認、<br>
 返り値をboolean型の変数に代入し、<br>
 trueであればスコープに詰め込んで RegisterConfirmController に送る、<br>
 falseであれば validation を通してエラーメッセージを作成し、register.jsp に送る。
+
 #### Controller RegisterConfirmController
 POST型で受け取った場合、情報を取得後User型のドメインモデルに変換し、<br>
 UserRegisterService を通してデータベースへの登録試みる。<br>
 登録の成否が返り値として送られてくるので、<br>
 trueの場合は registerDone.jsp を表示。<br>
 falseの場合は、エラー文を作ってスコープに詰め込み、register.jsp に送る。
+
 #### Service UserRegisterService
 メソッドuserEntryConfirm(User user)は、送られてきた情報をDTO型に詰めなおしたうえで、<br>
 UserDAO を通しての重複チェックを行い、その成否を返り値で返す。<br>
 メソッドuserEntryDo(User user)は、送られてきた情報をDTO型に詰めなおした上で、<br>
 UserDAO を通してINSERT文をデータベースに通し、その返り値(成功なら1,失敗なら0)をさらに返す。
+
 #### DAO UserDAO
 TransactioManager でトランザクションを開始した上で、<br>
 送られてきた情報を元にINSERT文を実行。<br>
 問題があればロールバック。<br>
 なければ成功件数を取得し(今回の場合は1件)、トランザクションを停止した上でその数値を返す。
+
 #### DAO TransactionManager
 コミットとロールバックの管理。
+
 #### DTO UserDTO
 データベースとのやり取り用。
+
 #### Domain User
 アプリ内でのデータのやり取り用。
+
 #### Utilty Validation
 入力チェック。<br>
 問題があればそれぞれの目的に応じたメッセージを返す。<br>
 （Utilityとは共通処理をまとめた便利クラスのこと）
 
-### ユーザー登録 - 簡易メソッド定義
-| クラス | メソッド名 | 目的 | 引数 | 戻り値 |
-| - | - | - | - | - |
-| RegisterController |  |  |  |  |
-|  | doGet() | 会員登録画面の表示(GET) |  |  |
-|  | doPost() | 入力チェック+確認画面(POST) |  |  |
-|  |  |  |  |  |
-| RegisterConfirmController |  |  |  |  |
-|  | doPost() | DB登録+成功・失敗画面へ(POST) |  |  |
-|  |  |  |  |  |
-| UserRegisterService |  |  |  |  |
-|  | userEntryConfirn(user) | ログインIDの重複チェック | User | boolean |
-|  | userEntryDo(user) | DBにユーザー登録 | User | boolean |
-|  |  |  |  |  |
-| UserDAO |  |  |  |  |
-|  | insert(dto) | ユーザー情報をDBに登録 | UserDTO dto | int |
-|  |  |  |  |  |
-| TransactionManager |  |  |  |  |
-|  | commit() | コミットを希望(実行はclose時) | なし | void |
-|  | rollback() | ロールバックを希望 | なし | void |
-|  | close() | トランザクションを終了処理 | なし | void |
-|  |  |  |  |  |
-| Validation |  |  |  |  |
-|  | hasErrorMsg() | エラーメッセージが1つ以上あるか確認 | - | boolean |
-|  | isBlank(name, text) | 未入力(空文字・null)チェック | String name, <br>String text | void |
-|  | length(name, text, min, max) | 文字数が指定範囲にあるかチェック | String name, <br>String text,<br>int min,<br>int max | void |
-|  | addErrorMsg | 任意のエラーメッセージを追加 | String mas | void |
-|  | getErrorMsgList() | エラーメッセージを取得 | なし | List<String> |
-
 
 ## ログアウト
-### ログアウト - 関連ファイル
+
 #### JSP login.jsp
 最後に表示される画面。
+
 #### Controller LogoutController
 GET型で受け取った時、セッションスコープを取得し、それを破棄。<br>
 login.jsp へ送る。
 
-### ログアウト - 簡易メソッド定義
-| LogoutController |  |  |  |  |
-| - | - | - | - | - |
-|  | doGet() | セッションを破棄してログイン画面に遷移する(GET) |  | void |
 
 ## 会員情報変更
-### 会員情報変更 - 関連ファイル
+
 #### JSP edit.jsp
 会員情報変更入力画面。<br>
 ユーザーが入力した情報をPOST型で EditController へ送る。
+
 #### JSP editConfirm.jsp
 内容確認画面。<br>
 受け取った情報を表示し、ユーザーが変更するボタンを押すとPOST型で editConfirmController に情報を送る。
+
 #### JSP editDone.jsp
 完了メッセージ画面。
+
 #### Controller EditController
 GET型で受け取った場合は、edit.jspを表示。<br>
 POST型で受け取った場合は、情報を取得後 validation を通してエラーチェックを行い、<br>
 エラーがあればエラーメッセージをリクエストスコープに詰め込んでedit.jspに送る。<br>
 問題がなければ受け取った情報をリクエストスコープに詰め込んで editConfirm.jsp に送る。
+
 #### Controller EditConfirmController
 POST型で受け取った場合、情報を取得後User型のドメインモデルに変換し、<br>
 UserEditService を通してデータベースの更新を試みる。<br>
 変更の成否が返り値として送られてくるので、<br>
 trueの場合は editDone.jsp を表示。<br>
 falseの場合は、エラー文を作ってリクエストスコープに詰め込み、edit.jsp に送る。
+
 #### Service UserEditService
 送られてきた情報をDTO型に詰めなおした上で、<br>
 UserDAO を通してUPDATE文をデータベースに通し、その返り値(成功なら1,失敗なら0)をさらに返す。
+
 #### DAO UserDAO
 TransactioManager でトランザクションを開始した上で、<br>
 送られてきた情報を元にUPDATE文を実行。<br>
 問題があればロールバック。<br>
 なければ成功件数を取得し(今回の場合は1件)、トランザクションを停止した上でその数値を返す。
+
 #### DAO TransactionManager
 #### DTO UserDTO
 #### Domain User
 #### Utilty Validati
 ユーザー登録の欄と挙動が同じなので割愛。
 
-### 会員情報変更 - 簡易メソッド定義
-| クラス               | メソッド名             | 目的                              | 引数             | 戻り値     |
-|----------------------|------------------------|-----------------------------------|------------------|------------|
-| EditController       |                        |                                   |                  |            |
-|                      | doGet()                | 会員登録画面の表示(GET)           |                  |            |
-|                      | doPost()               | 入力チェック+確認画面(POST)       |                  |            |
-| EditConfirmController|                        |                                   |                  |            |
-|                      | doPost()               | DB更新+成功・失敗画面へ(POST)     |                  |            |
-| UserEditService      |                        |                                   |                  |            |
-|                      | userEntryDo(user)      | DBにユーザー更新                  | User             | boolean    |
-| UserDAO              |                        |                                   |                  |            |
-|                      | edit(dto)              | ユーザー情報をDBに更新            | UserDTO dto      | int        |
-
-TransactionManager, UserDTO, Domain User, Utilty Validati ユーザー登録の欄と同じなのでは割愛。
-
 
 ## 登録削除
-### 登録削除 - 関連ファイル
+
 #### JSP deleteConfirm.jsp
 セッションスコープの会員情報を表示。<br>
 ユーザーが退会するボタンを押すと情報をPOST型で DeleteController へ送る。
+
 #### JSP deleteDone.jsp
 削除完了画面の表示。
+
 #### Controller DeleteController
 POST型で情報を取得後 User型に詰めなおし、<br>
 UserDeleteService を通してデータベースからユーザーデータの削除を試みて成否の返り値を受け取る。<br>
 成功している場合は、セッションスコープの中身を空にして、deleteDone.jsp へと送る。<br>
 失敗ている場合は、エラー文をリクエストスコープに詰め込んで deleteConfirm.jsp へ送る。
+
 #### Service UserDeleteService
 送られてきた情報をDTO型に詰めなおした上で、<br>
 UserDAO を通してDELETE文をデータベースに通し、その返り値(成功なら1,失敗なら0)をさらに返す。
+
 #### DAO UserDAO
 TransactioManager でトランザクションを開始した上で、<br>
 送られてきた情報を元にDELETE文を実行。<br>
 問題があればロールバック。<br>
 なければ成功件数を取得し(今回の場合は1件)、トランザクションを停止した上でその数値を返す。
+
 #### DAO TransactionManager
 #### DTO UserDTO
 #### Domain User
 ユーザー登録の欄と挙動が同じなので割愛。
-
-### 登録削除 - 簡易メソッド定義
-ユーザー登録や会員情報変更の欄とほぼ同じ~~で面倒~~なので省略。
