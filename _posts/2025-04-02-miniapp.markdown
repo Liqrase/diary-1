@@ -53,44 +53,40 @@ UserDAOを通してデータベースからユーザー情報を取得、<br>
 アプリ内部で使うためのユーザーモデル。
 
 ### ログイン - 簡易メソッド定義
-| クラス | メソッド名 | 目的 | 引数 | 戻り値 |
-| - | - | - | - | - |
-| BaseDAO |  |  |  |  |
-|  | getConnection() | DB接続を取得(初回は生成) | - | Connection |
-|  |  |  |  |  |
-| LoginController |  |  |  |  |
-|  | doGet() | ログイン画面表示(GET) |  |  |
-|  | doPost() | ログイン処理実行(POST) |  |  |
-|  |  |  |  |  |
-| UserLoginService |  |  |  |  |
-|  | loginCheck(id, pw) | 入力情報とDB情報を照合して認証 | String loginId,<br>String password | User or null |
-|  |  |  |  |  |
-| UserDAO |  |  |  |  |
-|  | selectByLoginId(id) | ログインIDからユーザー情報を取得 | String loginId | UserDTO or null |
-|  |  |  |  |  |
-| dto.UserDTO |  |  |  |  |
-|  | getId() | ユーザーIDを取得 | - | int |
-|  | setId(id) | ユーザーIDを設定 | int id | void |
-|  | getLoginId() | ログインIDを取得 | - | String |
-|  | setLoginId(id) | ログインIDを設定 | String loginId | void |
-|  | getPassword() | パスワードを取得 | - | String |
-|  | setPassword(pw) | パスワードを設定 | String password | void |
-|  | getName() | 名前を取得 | - | String |
-|  | setName(name) | 名前を設定 | String name | void |
-|  | getCreatedAt() | 登録日時を取得 | - | Timestamp |
-|  | setCreatedAt(ts) | 登録日時を設定 | Timestamp createdAt | void |
-|  |  |  |  |  |
-| User |  |  |  |  |
-|  | getId() | ユーザーIDを取得 | - | int |
-|  | setId(id) | ユーザーIDを設定 | int id | void |
-|  | getLoginId() | ログインIDを取得 | - | String |
-|  | setLoginId(id) | ログインIDを設定 | String loginId | void |
-|  | getPassword() | パスワードを取得 | - | String |
-|  | setPassword(pw) | パスワードを設定 | String password | void |
-|  | getName() | 名前を取得 | - | String |
-|  | setName(name) | 名前を設定 | String name | void |
-|  | getCreatedAt() | 登録日時を取得 | - | Date |
-|  | getCreatedAtStr(ts) | 表示用の登録日文字列を取得 | - | String |
+| クラス              | メソッド名                  | 目的                                     | 引数                                                  | 戻り値              |
+|---------------------|-----------------------------|------------------------------------------|--------------------------------------------------------|---------------------|
+| BaseDAO             |                             |                                          |                                                        |                     |
+|                     | getConnection()             | DB接続を取得(初回は生成)                | -                                                      | Connection          |
+| LoginController     |                             |                                          |                                                        |                     |
+|                     | doGet()                     | ログイン画面表示(GET)                   |                                                        |                     |
+|                     | doPost()                    | ログイン処理実行(POST)                  |                                                        |                     |
+| UserLoginService    |                             |                                          |                                                        |                     |
+|                     | loginCheck(id, pw)          | 入力情報とDB情報を照合して認証          | String loginId, String password                        | User or null        |
+| UserDAO             |                             |                                          |                                                        |                     |
+|                     | selectByLoginId(id)         | ログインIDからユーザー情報を取得        | String loginId                                         | UserDTO or null     |
+| dto.UserDTO         |                             |                                          |                                                        |                     |
+|                     | getId()                     | ユーザーIDを取得                         | -                                                      | int                 |
+|                     | setId(id)                   | ユーザーIDを設定                         | int id                                                 | void                |
+|                     | getLoginId()                | ログインIDを取得                         | -                                                      | String              |
+|                     | setLoginId(id)              | ログインIDを設定                         | String loginId                                         | void                |
+|                     | getPassword()               | パスワードを取得                         | -                                                      | String              |
+|                     | setPassword(pw)             | パスワードを設定                         | String password                                        | void                |
+|                     | getName()                   | 名前を取得                               | -                                                      | String              |
+|                     | setName(name)               | 名前を設定                               | String name                                            | void                |
+|                     | getCreatedAt()              | 登録日時を取得                           | -                                                      | Timestamp           |
+|                     | setCreatedAt(ts)            | 登録日時を設定                           | Timestamp createdAt                                    | void                |
+| User                |                             |                                          |                                                        |                     |
+|                     | getId()                     | ユーザーIDを取得                         | -                                                      | int                 |
+|                     | setId(id)                   | ユーザーIDを設定                         | int id                                                 | void                |
+|                     | getLoginId()                | ログインIDを取得                         | -                                                      | String              |
+|                     | setLoginId(id)              | ログインIDを設定                         | String loginId                                         | void                |
+|                     | getPassword()               | パスワードを取得                         | -                                                      | String              |
+|                     | setPassword(pw)             | パスワードを設定                         | String password                                        | void                |
+|                     | getName()                   | 名前を取得                               | -                                                      | String              |
+|                     | setName(name)               | 名前を設定                               | String name                                            | void                |
+|                     | getCreatedAt()              | 登録日時を取得                           | -                                                      | Date                |
+|                     | getCreatedAtStr(ts)         | 表示用の登録日文字列を取得              | -                                                      | String              |
+
 
 
 ## ユーザー登録
@@ -218,21 +214,17 @@ TransactioManager でトランザクションを開始した上で、<br>
 ユーザー登録の欄と挙動が同じなので割愛。
 
 ### 会員情報変更 - 簡易メソッド定義
-| クラス | メソッド名 | 目的 | 引数 | 戻り値 |
-| - | - | - | - | - |
-|  |  |  |  |  |
-| EditController |  |  |  |  |
-|  | doGet() | 会員登録画面の表示(GET) |  |  |
-|  | doPost() | 入力チェック+確認画面(POST) |  |  |
-|  |  |  |  |  |
-| EditConfirmController |  |  |  |  |
-|  | doPost() | DB更新+成功・失敗画面へ(POST) |  |  |
-|  |  |  |  |  |
-| UserEditService |  |  |  |  |
-|  | userEntryDo(user) | DBにユーザー更新 | User | boolean |
-|  |  |  |  |  |
-| UserDAO |  |  |  |  |
-|  | edit(dto) | ユーザー情報をDBに更新 | UserDTO dto | int |
+| クラス               | メソッド名             | 目的                              | 引数             | 戻り値     |
+|----------------------|------------------------|-----------------------------------|------------------|------------|
+| EditController       |                        |                                   |                  |            |
+|                      | doGet()                | 会員登録画面の表示(GET)           |                  |            |
+|                      | doPost()               | 入力チェック+確認画面(POST)       |                  |            |
+| EditConfirmController|                        |                                   |                  |            |
+|                      | doPost()               | DB更新+成功・失敗画面へ(POST)     |                  |            |
+| UserEditService      |                        |                                   |                  |            |
+|                      | userEntryDo(user)      | DBにユーザー更新                  | User             | boolean    |
+| UserDAO              |                        |                                   |                  |            |
+|                      | edit(dto)              | ユーザー情報をDBに更新            | UserDTO dto      | int        |
 
 TransactionManager, UserDTO, Domain User, Utilty Validati ユーザー登録の欄と同じなのでは割愛。
 
