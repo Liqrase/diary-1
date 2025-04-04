@@ -16,26 +16,26 @@ CSSはchatGPT製です。
 -- DB に移動 (文字コードによって"\"が半角バックスラッシュ"＼"になる場合があります)
 \c postgres;
 -- 一旦削除
-DROP TABLE IF EXISTS calc3;
+DROP TABLE IF EXISTS calc4;
 -- users テーブルの作成
-CREATE TABLE calc3 (
+CREATE TABLE calc4 (
   id SERIAL,
   login_id VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   name VARCHAR(255),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  numhold1 DECIMAL(22, 5),
-  numhold2 DECIMAL(22, 5),
-  numhold3 DECIMAL(22, 5),
-  numhold4 DECIMAL(22, 5),
+  numhold1 VARCHAR(255),
+  numhold2 VARCHAR(255),
+  numhold3 VARCHAR(255),
+  numhold4 VARCHAR(255),
   PRIMARY KEY(id)
 );
 -- dummy_data 準備
-INSERT INTO calc3 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user01', '11111111', '佐藤', '0', '0', '0', '0');
-INSERT INTO calc3 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user02', '22222222', '田中', '0', '0', '0', '0');
-INSERT INTO calc3 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user03', '33333333', '鈴木', '0', '0', '0', '0');
-INSERT INTO calc3 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user04', '44444444', '矢野', '0', '0', '0', '0');
-INSERT INTO calc3 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user05', '55555555', '松井', '0', '0', '0', '0');
+INSERT INTO calc4 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user01', '11111111', '佐藤', '0', '0', '0', '0');
+INSERT INTO calc4 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user02', '22222222', '田中', '0', '0', '0', '0');
+INSERT INTO calc4 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user03', '33333333', '鈴木', '0', '0', '0', '0');
+INSERT INTO calc4 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user04', '44444444', '矢野', '0', '0', '0', '0');
+INSERT INTO calc4 (login_id, password, name, numhold1, numhold2, numhold3, numhold4) VALUES ('user05', '55555555', '松井', '0', '0', '0', '0');
 -- 確認
-SELECT * FROM calc3;
+SELECT * FROM calc4;
 ```

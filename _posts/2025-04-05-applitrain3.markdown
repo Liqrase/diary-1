@@ -20,7 +20,7 @@ CSSはchatGPT製です。
 <html>
 <head>
 <meta charset="UTF-8">
-<title>計算機レベル2</title>
+<title>計算機レベル3</title>
 <link rel="stylesheet" type="text/css" href="/appra3/css/calc3top.css"/>
 </head>
 <body>
