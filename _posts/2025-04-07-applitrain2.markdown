@@ -1,7 +1,7 @@
 ---
 layout: post
 title: アプリ実践 レベル１
-date: 2025-04-05 23:00:00
+date: 2025-04-07 23:00:00
 description:  # Add post description (optional)
 img: postimg/250404_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
