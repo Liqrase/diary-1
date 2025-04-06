@@ -59,3 +59,5 @@ sudo rm -f /opt/tomcat/webapps/アプリ名.war
 sudo mv /var/www/liqrase.net/karioki/アプリ名.war /opt/tomcat/webapps/
 sudo systemctl restart tomcat
 ```
+
+以上。
