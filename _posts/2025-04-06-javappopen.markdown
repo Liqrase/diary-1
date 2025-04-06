@@ -3,7 +3,7 @@ layout: post
 title: Javaアプリを公開
 date: 2025-04-06 23:00:00
 description:  # Add post description (optional)
-img: postimg/250407_main.png # Add image post (optional)
+img: postimg/250406_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [java]
 ---
