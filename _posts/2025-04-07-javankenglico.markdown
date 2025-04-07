@@ -113,29 +113,29 @@ public class Javanken {
 ```
 jankenglico/
 └─ src/
-	  └─ main/
-			   	├─ java/
-					│			├─ cpntroller/
-					│			│		├─ JavankenController.java
-					│			│		└─ EndController.java
-					│			└─ model/
-					│					└─ JankenGame.java
-					└─ WebApp/
-									├─ css/
-									│		└─ javanken.css
-									├─ img/
-									│		└─ (各種画像)
-									├─ jsp/
-									│		├─ javankenTop.jsp
-									│		├─ javankenBattle.jsp
-									│		├─ javankenWin.jsp
-									│		└─ javankenLose.jsp
-									├─ META-INF/
-									└─ WEB-INF/
-												└─ lib
-															├─ jakarta.servlet.jsp.jstl-3.0.1.jar
-															├─ jakarta.servlet.jsp.jstl-api-3.0.0.jar
-															└─ jakarta.servlet.jsp-api-3.0.0.jar
+　　└─ main/
+　　　　├─ java/
+　　　　│　　├─ cpntroller/
+　　　　│　　│　　├─ JavankenController.java
+　　　　│　　│　　└─ EndController.java
+　　　　│　　└─ model/
+　　　　│　　　　└─ JankenGame.java
+　　　　└─ WebApp/
+　　　　　　├─ css/
+　　　　　　│　　└─ javanken.css
+　　　　　　├─ img/
+　　　　　　│　　└─ (各種画像)
+　　　　　　├─ jsp/
+　　　　　　│　　├─ javankenTop.jsp
+　　　　　　│　　├─ javankenBattle.jsp
+　　　　　　│　　├─ javankenWin.jsp
+　　　　　　│　　└─ javankenLose.jsp
+　　　　　　├─ META-INF/
+　　　　　　└─ WEB-INF/
+　　　　　　　　└─ lib
+　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-3.0.1.jar
+　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-api-3.0.0.jar
+　　　　　　　　　　└─ jakarta.servlet.jsp-api-3.0.0.jar
 ```
 
 そして以下、コードの中身を書き殴り。
