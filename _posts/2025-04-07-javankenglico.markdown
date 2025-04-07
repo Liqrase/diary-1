@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 計算アプリ レベル4
-date: 2025-04-07 23:00:00
+date: 2025-04-07 22:00:00
 description:  # Add post description (optional)
 img: postimg/250407_gliwin.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
