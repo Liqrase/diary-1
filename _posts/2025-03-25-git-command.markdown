@@ -3,7 +3,7 @@ layout: post
 title: 私用Gitコマンドセット
 date: 2025-03-13 22:15:00
 description:  # Add post description (optional)
-img: postimg/computer_screen_programming.png # Add image post (optional)
+img: postimg/250325_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Git]
 ---

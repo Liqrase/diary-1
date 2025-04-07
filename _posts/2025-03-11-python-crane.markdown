@@ -3,7 +3,7 @@ layout: post
 title: Python クレーンゲーム
 date: 2025-03-11 22:15:00
 description:  # Add post description (optional)
-img: postimg/20250311-1_main.png # Add image post (optional)
+img: postimg/250311_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Program, Python]
 ---

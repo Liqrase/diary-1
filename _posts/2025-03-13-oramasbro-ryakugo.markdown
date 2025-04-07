@@ -3,7 +3,7 @@ layout: post
 title: オラクルマスターブロンズ アルファベット集
 date: 2025-03-13 22:15:00
 description:  # Add post description (optional)
-img: postimg/20250313-1_main.png # Add image post (optional)
+img: postimg/250313_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Program, Python]
 ---
