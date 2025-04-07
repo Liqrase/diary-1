@@ -1,12 +1,13 @@
 ---
 layout: post
 title: じゃんけんグリコ(Java版)を製作
-date: 2025-04-08 23:00:00
+date: 2025-04-07 23:00:00
 description:  # Add post description (optional)
 img: postimg/250407_gliwin.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [java]
 ---
+
 この雑記帳の最初の記事である[Pythonで作ったジャンケングリコアプリ](https://liqrase.github.io/diary-1/python-jankenglico/)の内容を、Java向けに改造して公開しました。
 
 [公開場所](https://www.liqrase.net/appra.html)
