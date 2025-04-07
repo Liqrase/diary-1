@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 計算アプリ レベル4
+title: じゃんけんグリコ(Java版)を製作
 date: 2025-04-07 23:00:00
 description:  # Add post description (optional)
 img: postimg/250407_gliwin.png # Add image post (optional)
