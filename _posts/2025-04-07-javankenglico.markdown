@@ -125,7 +125,7 @@ jankenglico/
 　　　　├ css/
 　　　　│　└ javanken.css
 　　　　├ img/
-　　　　│　└ (各種画像)
+　　　　│　└ (各種画像ファイル)
 　　　　├ jsp/
 　　　　│　├ javankenTop.jsp
 　　　　│　├ javankenButtle.jsp
