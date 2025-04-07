@@ -177,7 +177,8 @@ jankenglico/
 </body>
 </html>
 ```
-#### javankenButtle ←綴りを間違えているのはご愛敬
+#### javankenButtle
+ファイル名の綴りを間違えているのはご愛敬
 ```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
