@@ -117,26 +117,26 @@ jankenglico/
 　　└─ main/
 　　　　├─ java/
 　　　　│　　├─ cpntroller/
-　　　　│　　│　　├─ JavankenController
-　　　　│　　│　　└─ EndController
+　　　　│　　│　　├─ JavankenController.java
+　　　　│　　│　　└─ EndController.java
 　　　　│　　└─ model/
-　　　　│　　　　└─ JankenGame
+　　　　│　　　　└─ JankenGame.java
 　　　　└─ WebApp/
 　　　　　　├─ css/
-　　　　　　│　　└─ javanken
+　　　　　　│　　└─ javanken.css
 　　　　　　├─ img/
 　　　　　　│　　└─ (各種画像)
 　　　　　　├─ jsp/
-　　　　　　│　　├─ javankenTop
-　　　　　　│　　├─ javankenBattle
-　　　　　　│　　├─ javankenWin
-　　　　　　│　　└─ javankenLose
+　　　　　　│　　├─ javankenTop.jsp
+　　　　　　│　　├─ javankenBattle.jsp
+　　　　　　│　　├─ javankenWin.jsp
+　　　　　　│　　└─ javankenLose.jsp
 　　　　　　├─ META-INF/
 　　　　　　└─ WEB-INF/
 　　　　　　　　└─ lib
-　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-3.0.1
-　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-api-3.0.0
-　　　　　　　　　　└─ jakarta.servlet.jsp-api-3.0.0
+　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-3.0.1.jar
+　　　　　　　　　　├─ jakarta.servlet.jsp.jstl-api-3.0.0.jar
+　　　　　　　　　　└─ jakarta.servlet.jsp-api-3.0.0.jar
 ```
 
 そして以下、コードの中身を書き殴り。
