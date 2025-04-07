@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 計算アプリ レベル4
-date: 2025-04-07 9:00:00
+date: 2025-04-07 12:00:00
 description:  # Add post description (optional)
 img: postimg/250407_main.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
@@ -256,15 +256,16 @@ SELECT * FROM calc4;
 </html>
 ```
 
-deleteConfirm.jsp<br>
-deleteDone.jsp<br>
-edit.jsp<br>
-editConfirm.jsp<br>
-editDone.jsp<br>
-login.jsp<br>
-register.jsp<br>
-registerConfirm.jsp<br>
-registerDone.jsp<br>
+下記jspファイル<br>
+deleteConfirm<br>
+deleteDone<br>
+edit<br>
+editConfirm<br>
+editDone<br>
+login<br>
+register<br>
+registerConfirm<br>
+registerDone<br>
 は省略
 
 ### controller
@@ -567,11 +568,11 @@ public class LogoutController extends HttpServlet {
 }
 ```
 
-DeleteController.java<br>
-EditConfirmController.java<br>
-EditController.java<br>
-RegisterConfirmController.java<br>
-RegisterController.java<br>
+DeleteController<br>
+EditConfirmController<br>
+EditController<br>
+RegisterConfirmController<br>
+RegisterController<br>
 は省略
 
 ### Service
@@ -643,9 +644,9 @@ public class UserLogoutService {
 }
 ```
 
-UserDeleteService.java<br>
-UserEditService.java<br>
-UserRegisterService.java<br>
+UserDeleteService<br>
+UserEditService<br>
+UserRegisterService<br>
 は省略
 
 ### DAO
@@ -1035,6 +1036,6 @@ public class User {
 }
 ```
 
-Validation.java<br>
+Validation<br>
 CSS<br>
 は省略
