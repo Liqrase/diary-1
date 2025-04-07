@@ -11,7 +11,7 @@ tags: [Program, Python]
 
 
 <details><summary>
-制作：ジャンケングリコを作る
+クリックで展開：ジャンケングリコを作る
 </summary>
 【条件】<br>
  ・キーボード入力でじゃんけんを行う<br>
