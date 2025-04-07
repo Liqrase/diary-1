@@ -128,7 +128,7 @@ jankenglico/
 　　　　│　└ (各種画像)
 　　　　├ jsp/
 　　　　│　├ javankenTop.jsp
-　　　　│　├ javankenBattle.jsp
+　　　　│　├ javankenButtle.jsp
 　　　　│　├ javankenWin.jsp
 　　　　│　└ javankenLose.jsp
 　　　　├ META-INF/
