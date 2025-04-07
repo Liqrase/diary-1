@@ -520,5 +520,5 @@ public class EndController extends HttpServlet {
 }
 ```
 
-<br>
+---
 以上です。
