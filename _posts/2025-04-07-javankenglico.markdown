@@ -116,7 +116,7 @@ jankenglico/
 └ src/
 　└ main/
 　　├ java/
-　　│　├ cpntroller/
+　　│　├ controller/
 　　│　│　├ JavankenController.java
 　　│　│　└ EndController.java
 　　│　└ model/
