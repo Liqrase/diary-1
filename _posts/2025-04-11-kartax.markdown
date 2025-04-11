@@ -35,12 +35,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class KartaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//jakarta→javax用の辞書を生成
+	//変換用の辞書を生成
 	private static final Map<String, String> HENKAN_MAP = new HashMap<>();
 	
 	// 初期化ブロック 定数的なデータ構造の準備に向いた処理
 	static {
-    // jakarta → javax の対象を詰め込む
+    	// jakarta → javax の対象を詰め込む
 		HENKAN_MAP.put("import jakarta.servlet.RequestDispatcher;", "import javax.servlet.RequestDispatcher;");
 		HENKAN_MAP.put("import jakarta.servlet.ServletException;", "import javax.servlet.ServletException;");
 		HENKAN_MAP.put("import jakarta.servlet.annotation.WebServlet;", "import javax.servlet.annotation.WebServlet;");
