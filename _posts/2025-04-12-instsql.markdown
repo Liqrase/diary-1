@@ -1,0 +1,39 @@
+---
+layout: post
+title: karta/vax変換ページを製作
+date: 2025-04-11 23:00:00
+description:  # Add post description (optional)
+img: postimg/250412_main.png # Add image post (optional)
+fig-caption: # Add figcaption (optional)
+tags: [java]
+---
+
+サイトのサーバーにPostgreSQLを導入し、未公開になっていた[計算アプリレベル4](https://liqrase.net/calc03/login)を公開しました！<br>
+丸1日かかった・・・。
+
+計算アプリレベル4は、「import java.security.MessageDigest;」でできるパスワードのハッシュ化を導入し、<br>
+（メジャーなのはMavenというのを使う方法らしい）<br>
+新規登録及びログアウトボタンを押したタイミングで、産まれてから10分以上経過したアカウントを削除するという機能を持たせてみました。<br>
+これで、作ったまま放置のアカウントでデータが埋まっていくのを防ぐ寸法です。
+
+SQLの導入においては、[Ubuntu（さくらVPS）に PostgreSQL をインストールし外部から接続する](https://zenn.dev/hdmt/articles/8b242a8c78f7f1)というページを参考にさせていただきました。
+
+その後はchatGPT嬢と一緒に権限を持たせる作業やらなんやら…。
+
+10分以上経過後のアカウントを削除するプログラムは、UserDAOのクラスに新たなメソッド
+```java
+// 古いユーザーを削除するメソッド
+    public void deleteOldUsers(Connection conn) {
+      try {
+          String sql = "DELETE FROM calc03users WHERE created_at < CURRENT_TIMESTAMP - INTERVAL '10 minutes'";
+          PreparedStatement stmt = conn.prepareStatement(sql);
+          int deleted = stmt.executeUpdate();
+          System.out.println(deleted + "件の古いユーザーを削除しました（外部conn）");
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+```
+を加え、それをUserDAOの<br>
+insert(UserDTO dto)　新規会員登録するメソッドと<br>
+updateMemo(UserDTO dto)　ログアウト時に電卓の値保持機能を保存するメソッドの中の<br>
+のSQL文生成の行の直前に deleteOldUsers(conn); と挿し込んでいます。
