@@ -1,0 +1,554 @@
+---
+layout: post
+title: サイトにPostgreSQLを導入
+date: 2025-04-24 23:00:00
+description:  # Add post description (optional)
+img: postimg/250424_main.png # Add image post (optional)
+fig-caption: # Add figcaption (optional)
+tags: [java]
+---
+
+昨日、[発表者の順番を決めるWebアプリ](https://liqrase.net/chusen/chusen)を公開したので、<br>
+それのコードにコメントを入れたものを記します。
+
+### Servlet
+
+ページ入口
+```java
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/chusen")
+public class ChusenController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+	// /chusen にアクセスしてきたときにjspファイルを表示(URLに.jspと表示されるのを防ぎたいため)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/chusen.jsp");
+		rd.forward(request, response);
+	}
+}
+```
+
+抽選コントローラ
+```java
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@WebServlet("/finalResult")
+public class FinalResultServlet extends HttpServlet {
+
+	// プログラム内のnew ArrayList()で型指定していないことに対して出てくる警告に対し、
+	// 「分かってますよ」と示し黙らせるためのアノテーション
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException {
+		// Postで受け取った情報の文字化けを防ぐ
+		request.setCharacterEncoding("UTF-8");
+		// 出力時のMIMEタイプ(データの種類)と文字コードを決める
+		response.setContentType("application/json; charset=UTF-8");
+
+		// Javaオブジェクト ⇄ JSON文字列 を自由自在に変換できるObjectMappe型を生成
+		ObjectMapper mapper = new ObjectMapper();
+		
+		// mapper.readValue(...)Jackson(JavaとJSONの橋渡し役)のObjectMapperを使って、
+		//						JSONをJavaオブジェクトに変換します
+		// request.getReader()	Postで受け取ったデータを読む
+		// Map.class			JSONを Map<String, String> として読み込むよう指定する
+		Map<String, String> inputMap = mapper.readValue(request.getReader(), Map.class);
+
+		// 入力値の分解 \\r?\\nは改行(様々なOSに対応させた書き方)、\\sは空白文字
+		// .get()で指定場所を取得し.trim()で空白を取り除き、.slot()で指定した値ごとに分割する
+		String[] slotLines = inputMap.get("slots").trim().split("\\r?\\n");
+		String[] memberLines = inputMap.get("members").trim().split("\\r?\\n");
+		String[] preferredLines = inputMap.get("preferred").trim().split("\\s*,\\s*");
+
+		// ヘッダーを抽出
+		String[] headers = slotLines[0].split("\\s*,\\s*");
+		
+		List<Map<String, String>> slotList = new ArrayList<>();
+		
+		// 各行をマップ形式で蓄積
+		// 1行目はヘッダーなので、2行目から開始
+		for (int i = 1; i < slotLines.length; i++) {
+			// .split()で余分な空白を取り除きつつ、
+			// -1と指示することで末尾が空でも空欄として認識するようにする
+			String[] values = slotLines[i].split("\\s*,\\s*", -1);
+			// 配列が空、もしくは1列目が空の場合はスキップ
+			if (values.length == 0 || values[0].isBlank()) continue;
+
+			// 順番付きの空のMapを用意しますの。
+			//（LinkedHashMapは入れた順番が保持される素敵な構造）
+			Map<String, String> slotData = new LinkedHashMap<>();
+			// ヘッダーの数だけループしますの（例："日", "時間", "No"）
+			for (int j = 0; j < headers.length; j++) {
+				// キーはヘッダーの名前、つまり "日" や "時間" など
+				String key = headers[j];
+				// データ側（values）に値があればそれを、なければ ""（空文字）をセット
+				String value = j < values.length ? values[j] : "";
+				// Map に "日":"25日" のように1ペアずつ追加していきますの
+				slotData.put(key, value);
+			}
+			// slotDataのリストをslotListに追加
+			slotList.add(slotData);
+		}
+
+		// 優先者と通常メンバーの区別
+		// 優先者リストを作成
+		List<String> preferred = new ArrayList<>();
+		for (String name : preferredLines) {
+			if (!name.isBlank()) preferred.add(name.trim());
+		}
+
+		// 抽選者から優先者を取り除き、抽選メンバーとして作成
+		List<String> members = new ArrayList<>();
+		for (String line : memberLines) {
+			String trimmed = line.trim();
+			// 空行を無視、かつ、preferredに入っている人を無視
+			if (!trimmed.isEmpty() && !preferred.contains(trimmed)) {
+				members.add(trimmed);
+			}
+		}
+
+		// メンバーをランダムにシャッフル
+		Collections.shuffle(members);
+
+		// 優先者リストの後にランダムにした抽選者リストを加えることで、全員のリストを完成させる
+		List<String> allNames = new ArrayList<>(preferred);
+		allNames.addAll(members);
+
+		// 結果リストの生成
+		List<Map<String, Object>> result = new ArrayList<>();
+		int slotId = 0;
+
+		// スロット、名前、どちらかの一覧が無くなったら終了
+		for (int i = 0; i < slotList.size() && i < allNames.size(); i++) {
+			Map<String, Object> entry = new LinkedHashMap<>();
+			// 一意な番号
+			entry.put("slotId", slotId++);
+			// スロット枠
+			entry.put("data", slotList.get(i));
+			// 名前枠
+			entry.put("name", allNames.get(i));
+			// 優先メンバーかどうかのフラグ(予備)
+			entry.put("priority", preferred.contains(allNames.get(i)));
+			result.add(entry);
+		}
+
+		// 出力
+		// 出力を「文字列として」「UTF-8で」安全に書き出す準備ですわ
+		PrintWriter out = new PrintWriter(response.getOutputStream(), true, StandardCharsets.UTF_8);
+		// mapper.writeValueAsString(result) で、Javaオブジェクト（List<Map<String, Object>>など）を JSON文字列に変換。
+		// それを out.print(...) で出力。
+		out.print(mapper.writeValueAsString(result));
+		// 書き出しバッファ(データを出力する前に一時的にためておくメモリ)にたまったデータを 強制的に出力。書き漏れ防止。
+		out.flush();
+	}
+}
+```
+
+### jsp
+結果表示部分はJavaScriptに任せています。<br>
+あらかじめ発表枠スロットに記入されているものは、これを作るきっかけとなった実際に使うもの、<br>
+名前欄に記入されているのは某漫画の園児と園長の苗字です。
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>発表順抽選アプリ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/chusen/css/style.css">
+</head>
+<body>
+    <h2>発表順抽選</h2>
+
+    <h3>発表枠スロット入力（1行目はヘッダー行）</h3>
+    <p>カンマ区切りで列の項目を増減可能です。<br>
+    中身が空のセルも作れますが、1列目だけは何かしら記入する必要があります。<br>
+    最低限、ヘッダーと1行目の計2行の記入が必要です。</p>
+    <textarea id="slot-input" rows="6" cols="60">
+日,時間,No
+25日,6限,1
+〃,,2
+〃,,3
+28日,1限,1
+〃,,2
+〃,,3
+〃,2限,1
+〃,,2
+〃,,3
+〃,3限,1
+〃,,2
+〃,,3
+〃,4限,1
+〃,,2
+〃,,3
+〃,5限,1
+〃,,2
+〃,,3
+〃,6限,1
+    </textarea>
+
+    <h3>発表者一覧（1行ずつ）</h3>
+    <textarea id="members-input" rows="6" cols="30">
+野原
+風間
+桜田
+佐藤
+高倉
+    </textarea>
+
+    <h3>優先者一覧（1行ずつ）</h3>
+    <p>記入した順番にそのまま結果の1行目から入っていきます。<br>
+    優先者の中でも抽選を行いたい場合は、先に優先者だけを上の抽選者一覧に記入して順番を決めてください。</p>
+    <textarea id="preferred-input" rows="4" cols="30">
+高倉
+    </textarea>
+
+    <br>
+    <button id="start-button">抽選スタート</button>
+    <button id="copy-button">結果をコピー</button>
+    <a href="https://www.liqrase.net/appra.html">戻る</a>
+	<br>
+    <table>
+        <thead>
+            <tr><th></th><th></th><th></th><th>当選者</th></tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+
+    <script src="/chusen/js/chusen.js"></script>
+    <script src="/chusen/js/copy.js"></script>
+</body>
+</html>
+```
+
+### JavaScript
+chatGPTに各メソッドのタイトルを付けてもらっておおよそに記しています。<br>
+抽選機能
+```javascript
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
+
+let finalData = [];
+let activeRandomInterval = null;
+
+// 🎭《起動の幕開け：くじ抽選スタートボタン》
+document.addEventListener("DOMContentLoaded", () => {
+	const startButton = document.getElementById("start-button");
+
+	startButton.addEventListener("click", () => {
+		audioCtx.resume().then(() => {
+			const slotsRaw = document.getElementById("slot-input").value.trim();
+			const membersRaw = document.getElementById("members-input").value.trim();
+			const preferredRaw = document.getElementById("preferred-input").value.trim();
+
+			const preferred = preferredRaw.split(/\r?\n/).map(s => s.trim()).filter(s => s);
+
+			// サーバーに送信
+			fetch("/chusen/finalResult", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					slots: slotsRaw,
+					members: membersRaw,
+					preferred: preferred.join(",")
+				})
+			})
+			.then(res => res.json())
+			.then(data => {
+				finalData = data;
+				displayTable(data);
+				startRandomDisplay();
+				setTimeout(showFinalResults, 5000);
+			});
+		});
+	});
+});
+
+// 🪑《配席の儀：抽選スロットと空席の配置》
+function displayTable(data) {
+	const table = document.getElementById("table-body");
+	const thead = document.querySelector("thead tr");
+	table.innerHTML = "";
+	thead.innerHTML = "";
+
+	if (data.length === 0) return;
+
+	// 最初の data から列名を取得
+	const headers = Object.keys(data[0].data);
+
+	// ヘッダー行
+	headers.forEach(h => {
+		const th = document.createElement("th");
+		th.textContent = h;
+		thead.appendChild(th);
+	});
+
+	const thName = document.createElement("th");
+	thName.textContent = "名前　　";
+	thead.appendChild(thName);
+
+	// 各行
+	data.forEach(entry => {
+		const tr = document.createElement("tr");
+
+		headers.forEach(h => {
+			const td = document.createElement("td");
+			td.textContent = entry.data[h] || "";
+			tr.appendChild(td);
+		});
+
+		const tdName = document.createElement("td");
+		tdName.className = "name-cell";
+		tdName.id = `cell-${entry.slotId}`;
+		tdName.textContent = "？？？";
+		tr.appendChild(tdName);
+
+		table.appendChild(tr);
+	});
+}
+
+// 🎰《運命のシャッフル：名前ランダム表示》
+function startRandomDisplay() {
+	activeRandomInterval = setInterval(() => {
+		finalData.forEach(entry => {
+			const cell = document.getElementById(`cell-${entry.slotId}`);
+			if (cell && !cell.classList.contains("decided")) {
+				const randomName = allNames[Math.floor(Math.random() * allNames.length)];
+				cell.textContent = randomName;
+			}
+		});
+	}, 100);
+	startLoopSound();
+}
+
+// 🌟《発表の時：確定演出と名前の表示》
+function showFinalResults() {
+	finalData.forEach((entry, i) => {
+		setTimeout(() => {
+			const cell = document.getElementById(`cell-${entry.slotId}`);
+			if (cell) {
+				cell.textContent = entry.name;
+				cell.classList.add("decided");
+				playDecisionSound();
+
+				if (i === 0) {
+					stopLoopSound(); // ← 最初に確定したときに止める！
+				}
+			}
+			if (i === finalData.length - 1) {
+				clearInterval(activeRandomInterval);
+			}
+		}, i * 500);
+	});
+}
+
+let loopingOsc = null;
+let loopIntervalId = null;
+
+// 🔊《鼓動の音：連打されるソの音》
+function startLoopSound() {
+	stopLoopSound(); // 二重起動防止
+	loopIntervalId = setInterval(() => {
+		const osc = audioCtx.createOscillator();
+		const gain = audioCtx.createGain();
+
+		// 音色を決める
+		osc.type = "square";
+		// 音の高さを決める
+		osc.frequency.setValueAtTime(783.99, audioCtx.currentTime); // ソ（G5）
+		gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+		osc.connect(gain);
+		gain.connect(audioCtx.destination);
+
+		osc.start();
+		// 0.08秒だけ鳴らす（ソッ）
+		osc.stop(audioCtx.currentTime + 0.08); 
+
+	// 120msごとに連打 → ソソソソソソ！
+	}, 120); 
+}
+
+// 🌙《静寂の訪れ：ループ音停止》
+function stopLoopSound() {
+	if (loopIntervalId !== null) {
+		clearInterval(loopIntervalId);
+		loopIntervalId = null;
+	}
+}
+
+// 🎶《確定のファンファーレ：ドと高いドの和音》
+function playDecisionSound() {
+	const osc1 = audioCtx.createOscillator();
+	const osc2 = audioCtx.createOscillator();
+	const gainNode = audioCtx.createGain();
+
+	// 音色を決める
+	osc1.type = "square";
+	osc2.type = "square";
+	// 音の高さを決める
+	osc1.frequency.setValueAtTime(523.25*2, audioCtx.currentTime); // ド
+	osc2.frequency.setValueAtTime(523.25, audioCtx.currentTime); // ド
+	// 音量が大きくなりすぎないようにする
+	gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+	osc1.connect(gainNode);
+	osc2.connect(gainNode);
+	gainNode.connect(audioCtx.destination);
+
+	osc1.start();
+	osc2.start();
+	osc1.stop(audioCtx.currentTime + 0.2);
+	osc2.stop(audioCtx.currentTime + 0.2);
+}
+
+// ランダム表示用名前リスト（日本に多い苗字Top30）
+const allNames = [
+	"佐藤", "鈴木", "高橋", "田中", "伊藤", "渡辺", "山本", "中村", "小林", "加藤",
+	"吉田", "山田", "佐々木", "山口", "松本", "井上", "木村", "林", "斎藤", "清水",
+	"山崎", "森", "池田", "橋本", "阿部", "石川", "山下", "中島", "石井"
+];
+```
+
+抽選結果コピー機能
+```javascript
+document.getElementById("copy-button").addEventListener("click", () => {
+	if (finalData.length === 0) {
+		alert("まだ結果がありません。抽選をしてからコピーをしてください。");
+		return;
+	}
+
+	const headers = Object.keys(finalData[0].data).concat("発表者");
+	const lines = [];
+
+	// ヘッダー行
+	lines.push(headers.join("\t"));
+
+	// 各データ行
+	finalData.forEach(entry => {
+		const values = headers.map(h => {
+			if (h === "発表者") return entry.name;
+			return entry.data[h] || "";
+		});
+		lines.push(values.join("\t"));
+	});
+
+	const text = lines.join("\n");
+
+	navigator.clipboard.writeText(text).then(() => {
+		alert("コピー完了♪ Excelに貼り付けてください。");
+	}).catch(err => {
+		alert("コピーに失敗いたしましたわ…… " + err);
+	});
+});
+```
+
+### CSS
+ほぼchatGPT任せ
+```css
+@charset "UTF-8";
+
+body {
+	font-family: 'Segoe UI', 'ヒラギノ角ゴ ProN', 'メイリオ', sans-serif;
+	background-color: #f5faff;
+	margin: 20px;
+	color: #333;
+}
+
+h2, h3 {
+	color: #2a4d69;
+	margin-top: 20px;
+}
+
+textarea {
+	width: 90%;
+	max-width: 400px;
+	font-size: 1rem;
+	font-family: monospace;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+	resize: vertical;
+}
+
+button,a {
+	color:#001858;
+	background-color: #0000;
+	border: 1.4px solid #999;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: .9rem;
+	padding: 6px 8px;
+	margin:0 5px;
+	text-decoration: none;
+}
+
+button:hover,a:hover {
+	background-color: #ffb6c1;
+}
+
+table {
+	width: 90%;
+	max-width: 500px;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 10px;
+	font-size: 1rem;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+thead th {
+	background-color: #e3f2fd;
+	padding: 5px;
+	border: 1px solid #ddd;
+	text-align: left;
+}
+
+tbody td {
+	padding: 5px;
+	border: 1px solid #ddd;
+}
+
+.name-cell {
+/*    font-weight: bold;*/
+	text-align: center;
+}
+
+.name-cell.decided {
+	background-color: #9edd8d;
+	color: #002100;
+}
+```
+
+以上です。
