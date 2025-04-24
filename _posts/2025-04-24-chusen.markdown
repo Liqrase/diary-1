@@ -1,6 +1,6 @@
 ---
 layout: post
-title: サイトにPostgreSQLを導入
+title: 発表順抽選風Webアプリを公開
 date: 2025-04-24 23:00:00
 description:  # Add post description (optional)
 img: postimg/250424_main.png # Add image post (optional)
